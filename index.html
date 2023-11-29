@@ -1,1 +1,49 @@
-<h1>hello</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="pougue-timer.css">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+
+</head>
+
+<body>
+    <h1>Pogue Timer</h1>
+    <script src="pougue-timer.js"></script>
+    <div>
+    <h2>Select A Time and Press Enter</h2>
+    <p id="countdown" class="countdown">0:00</p>
+    <select name="userinput()" id="time" class="dropdown">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+        <option value="13">13</option>
+        <option value="14">14</option>
+        <option value="15">15</option>
+      </select>
+      
+    
+    <button onclick="userinput()" class="pause">Enter</button>
+    <br><br>
+    <button onclick="start()"><i class="material-icons">play_arrow</i> </button>
+
+    
+    <button onclick="pause()"><i class="material-icons">pause</i> </button>
+    <br><br>
+    <button onclick="toggleDisplay()" class="pause">Hide Seconds</button>
+    
+</div>
+</body>
+</html>

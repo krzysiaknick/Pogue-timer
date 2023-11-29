@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Countdown Timer</title>
+</head>
+<body>
+
+<h1>Countdown Timer</h1>
+
+<p id="countdown">5:00</p>
+
+<button onclick="startCountdown()" id="startButton">Start</button>
+<button onclick="preset5()">5</button>
+<button onclick="preset10()">10</button>
+
+
+
+
+<script>
+
+  let minute_input = 5;
+  let time = minute_input * 60;
+  let countdownInterval;
+
+
+
+  function startCountdown() {
+    // Disable the button to prevent multiplying speed
+    document.getElementById('startButton').disabled = true;
+
+    countdownInterval = setInterval(function() {
+      countdown();
+
+      // Re-enable the button when the countdown is finished
+      if (time < 0) {
+        clearInterval(countdownInterval);
+        document.getElementById('startButton').disabled = false;
+        alert('Countdown finished!');
+      }
+    }, 1000);
+  }
+
+  function countdown() {
+    const minutes = Math.floor(time / 60);
+    let seconds = time % 60;
+    document.getElementById('countdown').innerHTML = `${minutes}:${seconds}`;
+    time--;
+  }
+
+
+//preset buttons to quickly select a time
+  function preset5() {
+    minute_input = 5;
+    time = minute_input * 60;
+    document.getElementById('countdown').innerHTML = `${minute_input}:00`;
+    clearInterval(countdownInterval);
+    
+    // Re-enable the button when the countdown is reset
+    document.getElementById('startButton').disabled = false;
+  }
+  function preset10() {
+    minute_input = 10;
+    time = minute_input * 60;
+    document.getElementById('countdown').innerHTML = `${minute_input}:00`;
+    clearInterval(countdownInterval);
+    
+    // Re-enable the button when the countdown is reset
+    document.getElementById('startButton').disabled = false;
+  }
+  ////preset buttons to quickly select a time
+  
+
+</script>
+
+</body>
+</html>

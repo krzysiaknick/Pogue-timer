@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Timer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 50px;
+    }
+
+    #timer {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+    button {
+      font-size: 1em;
+      margin: 5px;
+      padding: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <label for="preset">Preset:</label>
+    <select id="preset">
+      <option value="300">5 minutes</option>
+      <option value="600">10 minutes</option>
+    </select>
+    <br>
+    <label for="manual">Manual Time (seconds):</label>
+    <input type="number" id="manual" placeholder="Enter time in seconds">
+    <br>
+    <button onclick="startTimer()">Start</button>
+    <button onclick="stopTimer()">Stop</button>
+    <button onclick="pauseTimer()">Pause</button>
+  </div>
+  <div id="timer">00:00</div>
+
+  <script>
+    let timer;
+    let timeRemaining;
+    let isPaused = false;
+
+    function startTimer() {
+      const presetSelect = document.getElementById('preset');
+      const manualInput = document.getElementById('manual');
+
+      if (timer) {
+        clearInterval(timer);
+      }
+
+      if (presetSelect.value !== 'custom') {
+        timeRemaining = parseInt(presetSelect.value, 10);
+      } else {
+        timeRemaining = parseInt(manualInput.value, 10);
+      }
+
+      updateTimerDisplay();
+
+      timer = setInterval(function () {
+        if (timeRemaining <= 0) {
+          clearInterval(timer);
+          alert('Timer has ended!');
+        } else {
+          if (!isPaused) {
+            timeRemaining--;
+            updateTimerDisplay();
+          }
+        }
+      }, 1000);
+    }
+
+    function stopTimer() {
+      clearInterval(timer);
+      timeRemaining = 0;
+      updateTimerDisplay();
+    }
+
+    function pauseTimer() {
+      isPaused = !isPaused;
+      const pauseButton = document.querySelector('button[onclick="pauseTimer()"]');
+      pauseButton.textContent = isPaused ? 'Resume' : 'Pause';
+    }
+
+    function updateTimerDisplay() {
+      const minutes = Math.floor(timeRemaining / 60);
+      const seconds = timeRemaining % 60;
+      const formattedTime = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      document.getElementById('timer').textContent = formattedTime;
+    }
+  </script>
+</body>
+</html>
